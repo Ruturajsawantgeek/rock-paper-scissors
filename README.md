@@ -1,0 +1,1 @@
+Rock Paper Scissors game to be played against the computer in the JavaScript console.
