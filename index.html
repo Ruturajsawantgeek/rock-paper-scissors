@@ -8,14 +8,63 @@
   <script>
     function computerPlay() {
       let play = Math.floor(Math.random() * 3);
-      if play = 0 {
-          return "rock";
-      } else if play = 1 {
-          return "paper";
+      if (play == 0) {
+        return "rock";
+      } else if (play == 1) {
+        return "paper";
       } else {
-          return "scissors";
+        return "scissors";
       }
     }
+
+    function playRound(playerSelection, computerSelection) {
+      playerSelection = playerSelection.toLowerCase();
+      switch (true) {
+        case playerSelection === computerSelection:
+          return "Draw!";
+          break;
+        case playerSelection === "rock":
+          if (computerSelection === "paper") {
+            return "You lose! Paper beats rock.";
+          } else {
+            return "You win! Rock beats scissors.";
+          }
+          break;
+        case playerSelection === "paper":
+          if (computerSelection === "scissors") {
+            return "You lose! Scissors beats paper.";
+          } else {
+            return "You win! Paper beats rock.";
+          }
+          break;
+        case playerSelection === "scissors":
+          if (computerSelection === "rock") {
+            return "You lose! Rock beats scissors.";
+          } else {
+            return "You win! Scissors beats paper.";
+          }
+          break;
+        default:
+          return "Don't be a jerk!";
+      }
+    }
+
+    
+    //function playRound(playerSelection, computerSelection) {
+    //  if (playerSelection.toLowerCase() === "rock") {
+    //    computerSelection === "rock" ? "Draw!" :
+    //    computerSelection === "paper" ? "You lose! Paper beats rock." :
+    //    computerSelection === "scissors" ? "You win! Rock beats scissors."
+    //  } else if (playerSelection.toLowerCase() === "paper") {
+    //    computerSelection === "paper" ? "Draw!" :
+    //    computerSelection === "scissors" ? "You lose! Scissors beats paper." :
+    //    computerSelection === "rock" ? "You win! Paper beats rock."
+    //  } else if (playerSelection.toLowerCase() === "scissors") {
+    //    computerSelection === "scissors" ? "Draw!" :
+    //    computerSelection === "rock" ? "You lose! Rock beats scissors." :
+    //    computerSelection === "paper" ? "You win! Scissors beats paper."
+    //  }
+    //}
   </script>
 </body>
 </html>
