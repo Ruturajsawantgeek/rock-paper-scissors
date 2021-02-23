@@ -6,6 +6,7 @@
 </head>
 <body>
   <script>
+    // Randomly generate a play for computer.
     function computerPlay() {
       let play = Math.floor(Math.random() * 3);
       if (play == 0) {
@@ -17,8 +18,10 @@
       }
     }
 
+    // Return win/loss/draw condition given player selection.
     function playRound(playerSelection, computerSelection) {
-      playerSelection = playerSelection.toLowerCase();
+      playerSelection = prompt("Rock, paper, scissors!").toLowerCase();
+      computerSelection = computerPlay();
       switch (true) {
         case playerSelection === computerSelection:
           return "Draw!";
@@ -49,22 +52,31 @@
       }
     }
 
+    // Play a multi-round game; first to 5 wins.
+    function game() {
+      let i = 0;
+      let j = 0;
+      while (i < 5 && j < 5) {
+        let result = playRound();
+        if (result.includes("You win!")) {
+          i++;
+          alert(result + "\nYou: " + i.toString() + " | Computer: " + j.toString());
+        } else if (result.includes("You lose!")) {
+          j++;
+          alert(result + "\nYou: " + i.toString() + " | Computer: " + j.toString());
+        } else {
+          alert(result);
+        }
+        if (i === 5) {
+          alert("Congrats! You won the game!");
+        } 
+        if (j === 5) {
+          alert("You lost! Bummer!");
+        }
+      }
+    }
     
-    //function playRound(playerSelection, computerSelection) {
-    //  if (playerSelection.toLowerCase() === "rock") {
-    //    computerSelection === "rock" ? "Draw!" :
-    //    computerSelection === "paper" ? "You lose! Paper beats rock." :
-    //    computerSelection === "scissors" ? "You win! Rock beats scissors."
-    //  } else if (playerSelection.toLowerCase() === "paper") {
-    //    computerSelection === "paper" ? "Draw!" :
-    //    computerSelection === "scissors" ? "You lose! Scissors beats paper." :
-    //    computerSelection === "rock" ? "You win! Paper beats rock."
-    //  } else if (playerSelection.toLowerCase() === "scissors") {
-    //    computerSelection === "scissors" ? "Draw!" :
-    //    computerSelection === "rock" ? "You lose! Rock beats scissors." :
-    //    computerSelection === "paper" ? "You win! Scissors beats paper."
-    //  }
-    //}
+    game();
   </script>
 </body>
 </html>
