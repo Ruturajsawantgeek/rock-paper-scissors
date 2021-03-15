@@ -14,30 +14,31 @@ function motion() {
   document.getElementById("rightRock").classList.toggle("rightUp");
 }
 
-// function shoot() {
-  // let leftPlay = document.getElementsByClassName("leftHand")[0].id;
-  // let rightPlay = document.getElementsByClassName("rightHand")[0].id;
-// 
-  // if (playerSelection === "paper") {
-    // leftPlay = "leftPaper";
-  // } else if (playerSelection === "scissors") {
-    // leftPlay = "leftScissors";
-  // }
-  // if (computerSelection === "paper") {
-    // rightPlay = "rightPaper";
-  // } else if (computerSelection === "scissors") {
-    // rightPlay = "rightScissors";
-  // }
-// }
+function shoot() {
+  let leftPlay = document.getElementsByClassName("leftHand")[0];
+  let rightPlay = document.getElementsByClassName("rightHand")[0];
 
-function playRound(playerSelection, computerSelection) {
-  playerSelection = choice;
-  computerSelection = computerPlay();
+  if (playerSelection === "paper") {
+    leftPlay.id = "leftPaper";
+  } else if (playerSelection === "scissors") {
+    leftPlay.id = "leftScissors";
+  }
+  if (computerSelection === "paper") {
+    rightPlay.id = "rightPaper";
+  } else if (computerSelection === "scissors") {
+    rightPlay.id = "rightScissors";
+  }
+}
 
+function animation() {
+  document.getElementsByClassName("leftHand")[0].id = "leftRock";
+  document.getElementsByClassName("rightHand")[0].id = "rightRock";
   let rockPaperScissors = setInterval(motion, 200);
   setTimeout(function(){clearInterval(rockPaperScissors)}, 1600);
-  // setTimeout(shoot, 1600);
+  setTimeout(shoot, 1600);
+}
 
+function playRound() {
   switch (true) {
     case playerSelection === computerSelection:
       return "draw";
@@ -64,42 +65,59 @@ function playRound(playerSelection, computerSelection) {
   }
 }
 
+function keepScore() {
+  if (roundResult === "win") {
+    playerScore++;
+    document.querySelector("#youScore div.score").innerText = playerScore;
+  } else if (roundResult === "lose") {
+    cpuScore++;
+    document.querySelector("#themScore div.score").innerText = cpuScore;
+  }
+  if (playerScore === 5) {
+    playerScore = 0;
+    cpuScore = 0;
+    document.getElementById("winLoss").innerText = "YOU WIN";
+    document.querySelector("#youScore div.score").innerText = playerScore;
+    document.querySelector("#themScore div.score").innerText = cpuScore;
+  } 
+  if (cpuScore === 5) {
+    playerScore = 0;
+    cpuScore = 0;
+    document.getElementById("winLoss").innerText = "YOU LOSE";
+    document.querySelector("#youScore div.score").innerText = playerScore;
+    document.querySelector("#themScore div.score").innerText = cpuScore;
+  }
+}
+
 // GAME
-let i = 0;
-let j = 0;
-let choice;
+let playerScore = 0;
+let cpuScore = 0;
+let computerSelection;
+let playerSelection;
+let roundResult;
 
 document.addEventListener("keydown", event => {
+  // remove win-loss declaration if it's visible
+  document.getElementById("winLoss").innerText = "";
+
+  // get player's move
   if (event.key === "r") {
-    choice = "rock";
+    playerSelection = "rock";
   } else if (event.key === "p") {
-    choice = "paper";
+    playerSelection = "paper";
   } else if (event.key === "s") {
-    choice = "scissors";
+    playerSelection = "scissors";
   } else return;
 
-  let result = playRound();
-  setTimeout(function() {
-    if (result === "win") {
-      i++;
-      document.querySelector("#youScore div.score").innerText = i;
-    } else if (result === "lose") {
-      j++;
-      document.querySelector("#themScore div.score").innerText = j;
-    }
-    if (i === 5) {
-      i = 0;
-      j = 0;
-      document.getElementById("winLoss").innerText = "YOU WIN";
-      document.querySelector("#youScore div.score").innerText = i;
-      document.querySelector("#themScore div.score").innerText = j;
-    } 
-    if (j === 5) {
-      i = 0;
-      j = 0;
-      document.getElementById("winLoss").innerText = "YOU LOSE";
-      document.querySelector("#youScore div.score").innerText = i;
-      document.querySelector("#themScore div.score").innerText = j;
-    }
-  }, 1600);
+  // get computer's move
+  computerSelection = computerPlay()
+
+  // compare moves and determine win or loss for round
+  roundResult = playRound();
+
+  // show rock-paper-scissors-shoot motions
+  animation();
+
+  // update scores at end of animation and declare winner if either score is 5
+  setTimeout(keepScore, 1600);
 });
