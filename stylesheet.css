@@ -28,14 +28,15 @@ header {
     text-align: center;
     color:rgba(0, 0, 0, 0.5);
     padding-top: 20px;
+    line-height: 36px;
 }
 
 #winLoss {
     font-size: 48px;
     position: absolute;
-    top: 50%;
+    top: 33.33%;
     left: 50%;
-    transform: translate(-50%, -50%);
+    transform: translateX(-50%);
 }
 
 .containerBottom {

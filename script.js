@@ -67,25 +67,21 @@ function playRound() {
 
 function keepScore() {
   if (roundResult === "win") {
-    playerScore++;
-    document.querySelector("#youScore div.score").innerText = playerScore;
-  } else if (roundResult === "lose") {
-    cpuScore++;
+    document.querySelector("#youScore div.score").innerText = ++playerScore;
     document.querySelector("#themScore div.score").innerText = cpuScore;
+  } else if (roundResult === "lose") {
+    document.querySelector("#themScore div.score").innerText = ++cpuScore;
+    document.querySelector("#youScore div.score").innerText = playerScore;
   }
   if (playerScore === 5) {
     playerScore = 0;
     cpuScore = 0;
     document.getElementById("winLoss").innerText = "YOU WIN";
-    document.querySelector("#youScore div.score").innerText = playerScore;
-    document.querySelector("#themScore div.score").innerText = cpuScore;
   } 
   if (cpuScore === 5) {
     playerScore = 0;
     cpuScore = 0;
     document.getElementById("winLoss").innerText = "YOU LOSE";
-    document.querySelector("#youScore div.score").innerText = playerScore;
-    document.querySelector("#themScore div.score").innerText = cpuScore;
   }
 }
 
@@ -97,9 +93,6 @@ let playerSelection;
 let roundResult;
 
 document.addEventListener("keydown", event => {
-  // remove win-loss declaration if it's visible
-  document.getElementById("winLoss").innerText = "";
-
   // get player's move
   if (event.key === "r") {
     playerSelection = "rock";
@@ -108,6 +101,9 @@ document.addEventListener("keydown", event => {
   } else if (event.key === "s") {
     playerSelection = "scissors";
   } else return;
+
+  // remove win-loss declaration if it's visible
+  document.getElementById("winLoss").innerText = "";
 
   // get computer's move
   computerSelection = computerPlay()
