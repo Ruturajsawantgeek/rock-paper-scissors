@@ -3,80 +3,39 @@
 <head>
   <title>Rock, Paper, Scissors</title>
   <meta charset="UTF-8"/>
+  <link rel="stylesheet" href="stylesheet.css">
+  <script src="script.js" defer></script>
 </head>
 <body>
-  <script>
-    // Randomly generate a play for computer.
-    function computerPlay() {
-      let play = Math.floor(Math.random() * 3);
-      if (play == 0) {
-        return "rock";
-      } else if (play == 1) {
-        return "paper";
-      } else {
-        return "scissors";
-      }
-    }
+  <div id="winLoss"></div>
 
-    // Return win/loss/draw condition given player selection.
-    function playRound(playerSelection, computerSelection) {
-      playerSelection = prompt("Rock, paper, scissors!").toLowerCase();
-      computerSelection = computerPlay();
-      switch (true) {
-        case playerSelection === computerSelection:
-          return "Draw!";
-          break;
-        case playerSelection === "rock":
-          if (computerSelection === "paper") {
-            return "You lose! Paper beats rock.";
-          } else {
-            return "You win! Rock beats scissors.";
-          }
-          break;
-        case playerSelection === "paper":
-          if (computerSelection === "scissors") {
-            return "You lose! Scissors beats paper.";
-          } else {
-            return "You win! Paper beats rock.";
-          }
-          break;
-        case playerSelection === "scissors":
-          if (computerSelection === "rock") {
-            return "You lose! Rock beats scissors.";
-          } else {
-            return "You win! Scissors beats paper.";
-          }
-          break;
-        default:
-          return "Don't be a jerk!";
-      }
-    }
+  <div class="containerTop">
+    <header>rock_paper_scissors</header>
+    <div class="directions">
+      use <strong>R</strong>, <strong>P</strong>, and <strong>S</strong> keys to choose your play
+    </div>
+    <div class="directions">first to 5 wins</div>
+  </div>
 
-    // Play a multi-round game; first to 5 wins.
-    function game() {
-      let i = 0;
-      let j = 0;
-      while (i < 5 && j < 5) {
-        let result = playRound();
-        if (result.includes("You win!")) {
-          i++;
-          alert(result + "\nYou: " + i.toString() + " | Computer: " + j.toString());
-        } else if (result.includes("You lose!")) {
-          j++;
-          alert(result + "\nYou: " + i.toString() + " | Computer: " + j.toString());
-        } else {
-          alert(result);
-        }
-        if (i === 5) {
-          alert("Congrats! You won the game!");
-        } 
-        if (j === 5) {
-          alert("You lost! Bummer!");
-        }
-      }
-    }
-    
-    game();
-  </script>
+  <div class="containerBottom">
+    <div class="battleground">
+      <div class="hand leftHand" id="leftRock">
+        <img>
+      </div>
+      <div class="hand rightHand" id="rightRock">
+        <img>
+      </div>
+    </div>
+    <div class="scoreboard">
+      <div id="youScore">
+        <div>you</div>
+        <div class="score">0</div>
+      </div>
+      <div id="themScore">
+        <div>them</div>
+        <div class="score">0</div>
+      </div>
+    </div>
+  </div>
 </body>
 </html>

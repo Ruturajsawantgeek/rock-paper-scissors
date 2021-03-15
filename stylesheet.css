@@ -1,0 +1,119 @@
+html {
+    font-family: courier;
+    height: 100%;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    height: 100%;
+    max-width: 1200px;
+    background: radial-gradient(circle at center, white, rgb(79, 136, 182));
+}
+
+header {
+    font-size: 66px;
+    text-align: center;
+    padding-top: 50px;
+}
+
+@media (max-width: 977px) {
+    header {
+        font-size: 6.76vw;
+    }
+}
+
+.directions {
+    text-align: center;
+    color:rgba(0, 0, 0, 0.5);
+    padding-top: 20px;
+}
+
+#winLoss {
+    font-size: 48px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.containerBottom {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.battleground {
+    margin: 50px 12%;
+}
+
+.hand {
+    filter: drop-shadow(0 25px 15px rgba(0, 0, 0, 0.5));
+}
+
+.leftHand {
+    float: left;
+}
+
+.rightHand {
+    float: right;
+}
+
+.scoreboard {
+    display: flex;
+    margin: 0 20%;
+    justify-content: space-between;
+}
+
+#youScore {
+    text-align: center;
+    font-size: 24px;
+}
+
+#themScore {
+    text-align: center;
+    font-size: 24px;
+}
+
+.score {
+    font-size: 72px;
+}
+
+.leftUp {
+    transform: translateX(-25%) translateY(-100%) rotate(-0.125turn);
+}
+
+.rightUp {
+    transform: translateX(25%) translateY(-100%) rotate(0.125turn);
+}
+
+img {
+    height: 18vw;
+    max-height: 216px;
+}
+
+#leftRock img {
+    content: url("images/rock-left.svg");
+}
+
+#rightRock img {
+    content: url("images/rock-right.svg");
+}
+
+#leftPaper img {
+    content: url("images/paper-left.svg");
+}
+
+#rightPaper img {
+    content: url("images/paper-right.svg");
+}
+
+#leftScissors img {
+    content: url("images/scissors-left.svg");
+}
+
+#rightScissors img {
+    content: url("images/scissors-right.svg");
+}
