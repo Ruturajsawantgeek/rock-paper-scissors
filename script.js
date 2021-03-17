@@ -85,16 +85,36 @@ function keepScore() {
   }
 }
 
+function resetScore() {
+  if (
+    playerScore === 0 && 
+    cpuScore === 0 && 
+    youScore !== "0" &&
+    themScore !== "0"
+  ) {
+    youScore = playerScore;
+    themScore = cpuScore;
+  }
+}
+
 // GAME
 let playerScore = 0;
 let cpuScore = 0;
 let computerSelection;
 let playerSelection;
 let roundResult;
+let youScore = document.querySelector("#youScore div.score").innerText;
+let themScore = document.querySelector("#themScore div.score").innerText;
 
 const keyboardHandler = function(event) {
   // *
   document.removeEventListener("keydown", keyboardHandler);
+  
+  // remove win-loss declaration if it's visible
+  document.getElementById("winLoss").innerText = "";
+
+  // reset scores to zero if new game started
+  resetScore();
 
   // get player's move
   if (event.key === "r") {
@@ -107,9 +127,6 @@ const keyboardHandler = function(event) {
     document.addEventListener("keydown", keyBoardHandler);
     return;
   };
-
-  // remove win-loss declaration if it's visible
-  document.getElementById("winLoss").innerText = "";
 
   // get computer's move
   computerSelection = computerPlay()
