@@ -92,7 +92,10 @@ let computerSelection;
 let playerSelection;
 let roundResult;
 
-document.addEventListener("keydown", event => {
+const keyboardHandler = function(event) {
+  // *
+  document.removeEventListener("keydown", keyboardHandler);
+
   // get player's move
   if (event.key === "r") {
     playerSelection = "rock";
@@ -116,4 +119,11 @@ document.addEventListener("keydown", event => {
 
   // update scores at end of animation and declare winner if either score is 5
   setTimeout(keepScore, 1600);
-});
+
+  // *
+  document.addEventListener("keydown", keyboardHandler);
+
+  // * = this makes animation uninterruptible
+};
+
+document.addEventListener("keydown", keyboardHandler);
