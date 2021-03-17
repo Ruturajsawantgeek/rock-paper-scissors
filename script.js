@@ -103,7 +103,10 @@ const keyboardHandler = function(event) {
     playerSelection = "paper";
   } else if (event.key === "s") {
     playerSelection = "scissors";
-  } else return;
+  } else {
+    document.addEventListener("keydown", keyBoardHandler);
+    return;
+  };
 
   // remove win-loss declaration if it's visible
   document.getElementById("winLoss").innerText = "";
@@ -117,13 +120,14 @@ const keyboardHandler = function(event) {
   // show rock-paper-scissors-shoot motions
   animation();
 
-  // update scores at end of animation and declare winner if either score is 5
-  setTimeout(keepScore, 1600);
+  setTimeout( () => {
+    // update scores at end of animation and declare winner if either score is 5
+    keepScore();
+    //*
+    document.addEventListener("keydown", keyboardHandler);
+  }, 1600);
 
-  // *
-  document.addEventListener("keydown", keyboardHandler);
-
-  // * = this makes animation uninterruptible
+  // * = together these make animation uninterruptible
 };
 
 document.addEventListener("keydown", keyboardHandler);
