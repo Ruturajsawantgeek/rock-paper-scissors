@@ -10,14 +10,11 @@ function computerPlay() {
 }
 
 function motion() {
-  document.getElementById("leftRock").classList.toggle("leftUp");
-  document.getElementById("rightRock").classList.toggle("rightUp");
+  leftPlay.classList.toggle("leftUp");
+  rightPlay.classList.toggle("rightUp");
 }
 
 function shoot() {
-  let leftPlay = document.getElementsByClassName("leftHand")[0];
-  let rightPlay = document.getElementsByClassName("rightHand")[0];
-
   if (playerSelection === "paper") {
     leftPlay.id = "leftPaper";
   } else if (playerSelection === "scissors") {
@@ -31,8 +28,8 @@ function shoot() {
 }
 
 function animation() {
-  document.getElementsByClassName("leftHand")[0].id = "leftRock";
-  document.getElementsByClassName("rightHand")[0].id = "rightRock";
+  leftPlay.id = "leftRock";
+  rightPlay.id = "rightRock";
   let rockPaperScissors = setInterval(motion, 200);
   setTimeout(function(){clearInterval(rockPaperScissors)}, 1600);
   setTimeout(shoot, 1600);
@@ -67,33 +64,32 @@ function playRound() {
 
 function keepScore() {
   if (roundResult === "win") {
-    document.querySelector("#youScore div.score").innerText = ++playerScore;
-    document.querySelector("#themScore div.score").innerText = cpuScore;
+    youScore.innerText = ++playerScore;
+    themScore.innerText = cpuScore;
   } else if (roundResult === "lose") {
-    document.querySelector("#themScore div.score").innerText = ++cpuScore;
-    document.querySelector("#youScore div.score").innerText = playerScore;
+    themScore.innerText = ++cpuScore;
+    youScore.innerText = playerScore;
   }
   if (playerScore === 5) {
     playerScore = 0;
     cpuScore = 0;
-    document.getElementById("winLoss").innerText = "YOU WIN";
+    winLoss.innerText = "YOU WIN";
   } 
   if (cpuScore === 5) {
     playerScore = 0;
     cpuScore = 0;
-    document.getElementById("winLoss").innerText = "YOU LOSE";
+    winLoss.innerText = "YOU LOSE";
   }
 }
 
 function resetScore() {
   if (
     playerScore === 0 && 
-    cpuScore === 0 && 
-    youScore !== "0" &&
-    themScore !== "0"
+    cpuScore === 0 &&
+    youScore.innerText !== themScore.innerText
   ) {
-    youScore = playerScore;
-    themScore = cpuScore;
+    youScore.innerText = 0;
+    themScore.innerText = 0;
   }
 }
 
@@ -103,17 +99,20 @@ let cpuScore = 0;
 let computerSelection;
 let playerSelection;
 let roundResult;
-let youScore = document.querySelector("#youScore div.score").innerText;
-let themScore = document.querySelector("#themScore div.score").innerText;
+let youScore = document.querySelector("#youScore div.score");
+let themScore = document.querySelector("#themScore div.score");
+let winLoss = document.getElementById("winLoss");
+let leftPlay = document.getElementsByClassName("leftHand")[0];
+let rightPlay = document.getElementsByClassName("rightHand")[0];
 
 const keyboardHandler = function(event) {
   // *
   document.removeEventListener("keydown", keyboardHandler);
   
   // remove win-loss declaration if it's visible
-  document.getElementById("winLoss").innerText = "";
+  winLoss.innerText = "";
 
-  // reset scores to zero if new game started
+  // reset shown scores to zero if new game started
   resetScore();
 
   // get player's move
@@ -124,7 +123,7 @@ const keyboardHandler = function(event) {
   } else if (event.key === "s") {
     playerSelection = "scissors";
   } else {
-    document.addEventListener("keydown", keyBoardHandler);
+    document.addEventListener("keydown", keyboardHandler);
     return;
   };
 
