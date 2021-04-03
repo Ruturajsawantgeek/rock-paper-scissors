@@ -1,4 +1,21 @@
 (function() {
+  let images = [];
+  function preload() {
+    for (let i = 0; i < arguments.length; i++) {
+      images[i] = new Image();
+      images[i].src = preload.arguments[i];
+    }
+  }
+
+  preload(
+    "images/rock-left.svg",
+    "images/rock-right.svg",
+    "images/paper-left.svg",
+    "images/paper-right.svg",
+    "images/scissors-left.svg",
+    "images/scissors-right.svg"
+  );
+
   function computerPlay() {
     let play = Math.floor(Math.random() * 3);
     if (play == 0) {
