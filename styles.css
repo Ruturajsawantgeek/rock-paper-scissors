@@ -56,10 +56,12 @@ header {
 
 .leftHand {
     float: left;
+    transition: all 200ms ease;
 }
 
 .rightHand {
     float: right;
+    transition: all 200ms ease;
 }
 
 .scoreboard {
