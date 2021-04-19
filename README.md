@@ -1,3 +1,5 @@
+[**LIVE PREVIEW**](https://asbelljc.github.io/rock-paper-scissors/)
+
 This is a rock-paper-scissors game with a simple UI and animations.
 
 This project taught me a ton! Some of the big ones:
